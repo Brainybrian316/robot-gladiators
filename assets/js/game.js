@@ -12,7 +12,7 @@ var enemyAttack = 12;
 //  logs
 console.log(enemyNames);
 console.log(enemyNames.length);
-consoles.log(enemyNames[0]);
+console.log(enemyNames[0]);
 console.log(enemyNames[3]);
 
 // Fight sequence
