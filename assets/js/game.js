@@ -28,8 +28,7 @@ var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? En
 
         playerMoney = playerMoney - 10;
         console.log("playerMoney" , playerMoney);
-        break;
-    }
+        break; }
  }
 
 enemyHealth = enemyHealth - playerAttack;
@@ -65,8 +64,6 @@ else {
     } 
   }  
 }; 
-
-
 
 var startGame = function() {
     playerHealth = 100;
