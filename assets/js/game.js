@@ -16,138 +16,146 @@ console.log(enemyNames[0]);
 console.log(enemyNames[2]);
 
 
-var fight = function(enemyName) {
-    while(playerHealth > 0 && enemyHealth > 0) {
-var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+var fight = function (enemyName) {
+    var randomNumber = function (min, max) {
+        var value = Math.floor(Math.random() * (max - min + 1) + min);
 
- if (promptFight === "skip" || promptFight === "SKIP") {
-    var confirmSkip = window.confirm(" Are you Sure you'd like to quit? ");
+        return value;
+    };
+    while (playerHealth > 0 && enemyHealth > 0) {
+        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
-    if (confirmSkip) {
-        window.alert(playerName + " has decided to skip the fight. Goodbye! ");
+        if (promptFight === "skip" || promptFight === "SKIP") {
+            var confirmSkip = window.confirm(" Are you Sure you'd like to quit? ");
 
-        playerMoney = playerMoney - 10;
-        console.log("playerMoney" , playerMoney);
-        break; }
- }
+            if (confirmSkip) {
+                window.alert(playerName + " has decided to skip the fight. Goodbye! ");
 
-enemyHealth = enemyHealth - playerAttack;
-console.log(
-playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining "
-);
+                playerMoney = Math.max(0, playerMoney - 10);
+                console.log("playerMoney", playerMoney);
+                break;
+            }
+        }
+        var damage = randomNumber(playerAttack - 3, playerAttack);
+        enemyHealth = Math.max(0, enemyHealth - damage);
+        console.log(
+            playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining "
+        );
 
-if (enemyHealth <= 0) {
-    window.alert(enemyName + " has died! ");
-
-
-playerMoney = playerMoney + 20;
-break;
-}
-
-else {
-    window.alert(enemyName + " still has " + enemyHealth + " health left. ");
-}
+        if (enemyHealth <= 0) {
+            window.alert(enemyName + " has died! ");
 
 
-playerHealth = playerHealth - enemyAttack;
-console.log(
-enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining. "
-);
+            playerMoney = playerMoney + 20;
+            break;
+        } else {
+            window.alert(enemyName + " still has " + enemyHealth + " health left. ");
+        }
+
+        var damage = randomNumber(enemyAttack - 3, enemyAttack);
+        playerHealth = Math.max(0, playerHealth - damage);
+        console.log(
+            enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining. "
+        );
 
 
-if (playerHealth <= 0) {
-    window.alert(playerName + " has died! ");
-    break;
-} 
-else {
-    window.alert(playerName + " still has " + playerHealth + "health left. ");
-    } 
-  }  
-}; 
+        if (playerHealth <= 0) {
+            window.alert(playerName + " has died! ");
+            break;
+        } else {
+            window.alert(playerName + " still has " + playerHealth + "health left. ");
+        }
+    }
+};
 
-var startGame = function() {
+var startGame = function () {
+    var randomNumber = function (min, max) {
+        var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+        return value;
+    };
     playerHealth = 100;
     playerAttack = 10;
     playerMoney = 10;
 
-for(var i = 0; i < enemyNames.length;  i++) {
-  
-    if (playerHealth > 0) {
-        window.alert("Welcome to Robot Gladiators! Round " + (i + 1 ) );
-        var pickedEnemyName = enemyNames[i];
-        enemyHealth = 50;
-        fight(pickedEnemyName);
+    for (var i = 0; i < enemyNames.length; i++) {
 
-        if (playerHealth > 0 && i <enemyNames.length - 1) {
-            var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
-            if (storeConfirm) {
-                shop();
+        if (playerHealth > 0) {
+            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+            var pickedEnemyName = enemyNames[i];
+            enemyHealth = randomNumber(40, 60);
+            fight(pickedEnemyName);
+
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+                if (storeConfirm) {
+                    shop();
+                }
             }
+        } else {
+            window.alert("You have lost your robot in battle! Game Over!");
+            break;
         }
     }
-    else {
-        window.alert("You have lost your robot in battle! Game Over!");
-        break;
-     }
-}
     endGame();
 };
 
-var endGame = function() {
+var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
 
     if (playerHealth > 0) {
         window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
-    }
-    else {
+    } else {
         window.alert("You've lost your robot in battle!");
     }
-    
+
     if (playAgainConfirm) {
         startGame();
-    }
-        else {
-            window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    } else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
 };
 
-var shop = function() {
-    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please entere one 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."); 
+var shop = function () {
+    var randomNumber = function (min, max) {
+        var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+        return value;
+    };
+    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please entere one 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
     switch (shopOptionPrompt) {
-        case 'REFILL' :
-        case 'refill' : 
-        if (playerMoney >= 7) {
-            window.alert("refilling player's health by 20 for 7 dollars.");
-        
-            playerHealth = playerHealth + 20;
-            playerMoney = playerMoney -7;
-        }
-        else {
-            window.alert("You don't have enough moey!");
-        }
-        break;
-    case 'UPGRADE' : 
-    case 'upgrade' :
-        if (playerMoney >=7) {
-            window.alert("Upgrading player's attack by 6 for 7 dollars.");
+        case 'REFILL':
+        case 'refill':
+            if (playerMoney >= 7) {
+                window.alert("refilling player's health by 20 for 7 dollars.");
 
-            playerAttack = playerAttack + 6;
-            playerMoney = playerMoney - 7;
-        }
-        else {
-            window.alert("You don't have enough money!");
-        }
-        break;
-    case 'LEAVE' :
-    case 'leave' :
-        window.alert("Leaving the store.");
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+            } else {
+                window.alert("You don't have enough moey!");
+            }
+            break;
+        case 'UPGRADE':
+        case 'upgrade':
+            if (playerMoney >= 7) {
+                window.alert("Upgrading player's attack by 6 for 7 dollars.");
 
-        break;
-    default:
-        window.alert("You did not pick a valid option. Try again.");
+                playerAttack = playerAttack + 6;
+                playerMoney = playerMoney - 7;
+            } else {
+                window.alert("You don't have enough money!");
+            }
+            break;
+        case 'LEAVE':
+        case 'leave':
+            window.alert("Leaving the store.");
 
-        shop();
-        break;
+            break;
+        default:
+            window.alert("You did not pick a valid option. Try again.");
+
+            shop();
+            break;
     }
 };
 
