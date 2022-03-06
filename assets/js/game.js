@@ -117,11 +117,7 @@ var endGame = function () {
 };
 
 var shop = function () {
-    var randomNumber = function (min, max) {
-        var value = Math.floor(Math.random() * (max - min + 1) + min);
 
-        return value;
-    };
     var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please entere one 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
     switch (shopOptionPrompt) {
         case 'REFILL':
