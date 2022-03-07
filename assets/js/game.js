@@ -1,10 +1,13 @@
+/* GAME FUNCTIONS */
+
+// function to generate a random numeric value
+var randomNumber = function (min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+    return value;
+};
+// fight function 
 var fight = function (enemy) {
-
-    var randomNumber = function (min, max) {
-        var value = Math.floor(Math.random() * (max - min + 1) + min);
-
-        return value;
-    };
     while (playerInfo.health > 0 && enemy.health > 0) {
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
@@ -28,7 +31,6 @@ var fight = function (enemy) {
         if (enemy.health <= 0) {
             window.alert(enemy.name + " has died! ");
 
-
             playerInfo.money = playerInfo.money + 20;
             break;
         } else {
@@ -51,13 +53,9 @@ var fight = function (enemy) {
     }
 };
 
+// Start a new game function
 
 var startGame = function () {
-    var randomNumber = function (min, max) {
-        var value = Math.floor(Math.random() * (max - min + 1) + min);
-
-        return value;
-    };
     playerInfo.reset();
 
     for (var i = 0; i < enemyInfo.length; i++) {
@@ -82,6 +80,7 @@ var startGame = function () {
     endGame();
 };
 
+// End Game Function
 var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
 
@@ -91,6 +90,8 @@ var endGame = function () {
         window.alert("You've lost your robot in battle!");
     }
 
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
     if (playAgainConfirm) {
         startGame();
     } else {
@@ -98,9 +99,11 @@ var endGame = function () {
     }
 };
 
+// Shop Function
 var shop = function () {
 
     var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please entere one 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
+
     switch (shopOptionPrompt) {
         case 'REFILL':
         case 'refill':
@@ -121,14 +124,10 @@ var shop = function () {
             shop();
             break;
     }
-
 };
-var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
+/* GAME INFORMATION / VARIABLE */
 
-    return value;
-};
-//  Player
+//  Player Information
 var playerInfo = {
     name: window.prompt("What is your robot's name?"),
     health: 100,
@@ -159,7 +158,7 @@ var playerInfo = {
     }
 };
 
-//  Enemy
+//  Enemy Information
 var enemyInfo = [{
         name: "Roborto",
         attack: randomNumber(10, 14)
@@ -173,4 +172,11 @@ var enemyInfo = [{
         attack: randomNumber(10, 14)
     }
 ];
+
+console.log(enemyInfo);
+console.log(enemyInfo[0]);
+console.log(enemyInfo[0].name);
+console.log(enemyInfo[0]['attack']);
+
+/* RUN GAME */
 startGame();
