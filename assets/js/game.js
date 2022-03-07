@@ -2,13 +2,13 @@
 
 // function to generate a random numeric value
 var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
+    var value = Math.floor(Math.random() * (max - min) + min);
 
     return value;
 };
 
 var fightOrSkip = function () {
-    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter FIGHT or SKIP to choose.');
 
     if (promptFight === "" || promptFight === null) {
         window.alert("You need to provide a valid answer! Please try again.");
@@ -26,7 +26,6 @@ var fightOrSkip = function () {
             playerInfo.money = Math.max(0, playerInfo.money - 10);
 
             return true;
-            // console.log("playerInfo.money", playerInfo.money);
         }
     }
     return false;
@@ -60,9 +59,7 @@ var fight = function (enemy) {
             } else {
                 window.alert(enemy.name + " still has " + enemy.health + " health left. ");
             }
-
         } else {
-
             var damage = randomNumber(enemy.attack - 3, enemy.attack);
             playerInfo.health = Math.max(0, playerInfo.health - damage);
             console.log(
